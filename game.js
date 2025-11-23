@@ -1085,9 +1085,17 @@ class Game {
         this.canvas = document.getElementById('gameCanvas');
         this.ctx = this.canvas.getContext('2d');
 
-        // Set canvas size
-        this.canvas.width = CONFIG.canvas.width;
-        this.canvas.height = CONFIG.canvas.height;
+        // Base game dimensions (internal resolution)
+        this.baseWidth = CONFIG.canvas.width;
+        this.baseHeight = CONFIG.canvas.height;
+
+        // Scale factors for responsive design
+        this.scale = 1;
+        this.offsetX = 0;
+        this.offsetY = 0;
+
+        // Set initial canvas size
+        this.resizeCanvas();
 
         // Game state
         this.state = 'menu';
@@ -1113,6 +1121,60 @@ class Game {
         // UI Elements
         this.initUI();
         this.setupEventListeners();
+        this.setupResizeHandler();
+    }
+
+    resizeCanvas() {
+        const container = this.canvas.parentElement;
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+
+        // Calculate aspect ratio
+        const gameAspect = this.baseWidth / this.baseHeight;
+        const containerAspect = containerWidth / containerHeight;
+
+        let canvasWidth, canvasHeight;
+
+        // Fit canvas to container while maintaining aspect ratio
+        if (containerAspect > gameAspect) {
+            // Container is wider - fit to height
+            canvasHeight = containerHeight;
+            canvasWidth = canvasHeight * gameAspect;
+        } else {
+            // Container is taller - fit to width
+            canvasWidth = containerWidth;
+            canvasHeight = canvasWidth / gameAspect;
+        }
+
+        // Set canvas display size (CSS)
+        this.canvas.style.width = canvasWidth + 'px';
+        this.canvas.style.height = canvasHeight + 'px';
+
+        // Set canvas internal resolution
+        this.canvas.width = this.baseWidth;
+        this.canvas.height = this.baseHeight;
+
+        // Calculate scale for coordinate conversion
+        this.scale = canvasWidth / this.baseWidth;
+        this.offsetX = (containerWidth - canvasWidth) / 2;
+        this.offsetY = (containerHeight - canvasHeight) / 2;
+    }
+
+    setupResizeHandler() {
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                this.resizeCanvas();
+            }, 100);
+        });
+
+        // Handle orientation change on mobile
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                this.resizeCanvas();
+            }, 100);
+        });
     }
 
     initUI() {

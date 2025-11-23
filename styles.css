@@ -563,6 +563,11 @@ select option {
 #gameScreen {
     flex-direction: column;
     background: #000;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* HUD */
@@ -675,10 +680,22 @@ select option {
 
 /* Canvas */
 #gameCanvas {
-    width: 100%;
-    height: 100%;
     display: block;
     background: #000;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Mobile viewport adjustments */
+@media (max-width: 1024px) {
+    #gameScreen {
+        height: 100vh;
+        height: 100dvh; /* Use dynamic viewport height for mobile */
+    }
 }
 
 /* Pause Menu */
@@ -914,6 +931,15 @@ select option {
 
     .combo-counter {
         font-size: 0.9rem;
+    }
+
+    /* Reduce control button opacity when not active */
+    .control-btn {
+        opacity: 0.8;
+    }
+
+    .control-btn:active {
+        opacity: 1;
     }
 }
 
@@ -1156,6 +1182,7 @@ select option {
     padding: 20px;
     z-index: 50;
     pointer-events: none;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
 }
 
 .mobile-controls * {
@@ -1166,6 +1193,16 @@ select option {
 @media (max-width: 1024px), (hover: none) {
     .mobile-controls {
         display: flex;
+    }
+
+    /* Adjust HUD padding to account for mobile controls */
+    .hud {
+        padding: 15px;
+    }
+
+    /* Make canvas container account for mobile controls */
+    #gameCanvas {
+        max-height: calc(100vh - 220px);
     }
 }
 
@@ -1326,6 +1363,10 @@ select option {
     .btn-label {
         font-size: 0.55rem;
     }
+
+    #gameCanvas {
+        max-height: calc(100vh - 180px);
+    }
 }
 
 /* Extra small devices */
@@ -1362,6 +1403,10 @@ select option {
     .action-controls {
         gap: 8px;
     }
+
+    #gameCanvas {
+        max-height: calc(100vh - 160px);
+    }
 }
 
 /* Landscape mobile - Adjust control positioning */
@@ -1384,5 +1429,23 @@ select option {
 
     .btn-label {
         font-size: 0.5rem;
+    }
+
+    #gameCanvas {
+        max-height: calc(100vh - 140px);
+    }
+
+    /* Adjust HUD for landscape */
+    .hud {
+        padding: 10px;
+    }
+
+    .player-hud {
+        width: 40%;
+    }
+
+    #timer {
+        font-size: 1.5rem;
+        padding: 5px 10px;
     }
 }

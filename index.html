@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shinobi Clash - Ninja Fighting Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Title Screen -->
+        <div id="titleScreen" class="screen active">
+            <div class="title-content">
+                <h1 class="game-title">SHINOBI CLASH</h1>
+                <p class="subtitle">A Ninja Fighting Experience</p>
+
+                <!-- Character Selection -->
+                <div class="character-selection">
+                    <h3>Select Your Character</h3>
+                    <div class="character-grid">
+                        <div class="character-card selected" data-character="naruto">
+                            <div class="character-preview naruto-preview">
+                                <img src="images/naruto.jpg" alt="Naruto" class="character-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div class="character-fallback">
+                                    <div class="char-hair" style="background: #ffd700; width: 55px; height: 25px; position: absolute; top: 30px; border-radius: 50% 50% 0 0;"></div>
+                                    <div class="char-eyes" style="position: absolute; top: 50px;">
+                                        <div style="width: 8px; height: 8px; background: #000; border-radius: 50%; display: inline-block; margin: 0 4px;"></div>
+                                        <div style="width: 8px; height: 8px; background: #000; border-radius: 50%; display: inline-block; margin: 0 4px;"></div>
+                                    </div>
+                                    <div style="position: absolute; bottom: 20px; font-size: 1.5rem;">💨</div>
+                                </div>
+                            </div>
+                            <h4>Naruto</h4>
+                            <p class="character-type">Balanced Fighter</p>
+                            <div class="character-stats">
+                                <span>⚡ Speed: ★★★☆☆</span>
+                                <span>💪 Power: ★★★☆☆</span>
+                                <span>🛡️ Defense: ★★★☆☆</span>
+                            </div>
+                        </div>
+                        <div class="character-card" data-character="sasuke">
+                            <div class="character-preview sasuke-preview">
+                                <img src="images/sasuke.png" alt="Sasuke" class="character-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div class="character-fallback">
+                                    <div class="char-hair" style="background: #1a1a2e; width: 55px; height: 30px; position: absolute; top: 28px; border-radius: 50% 50% 0 0;"></div>
+                                    <div class="char-eyes" style="position: absolute; top: 50px;">
+                                        <div style="width: 8px; height: 8px; background: #000; border-radius: 50%; display: inline-block; margin: 0 4px;"></div>
+                                        <div style="width: 8px; height: 8px; background: #000; border-radius: 50%; display: inline-block; margin: 0 4px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4>Sasuke</h4>
+                            <p class="character-type">Speed Specialist</p>
+                            <div class="character-stats">
+                                <span>⚡ Speed: ★★★★★</span>
+                                <span>💪 Power: ★★★★☆</span>
+                                <span>🛡️ Defense: ★★☆☆☆</span>
+                            </div>
+                        </div>
+                        <div class="character-card" data-character="sakura">
+                            <div class="character-preview sakura-preview">
+                                <img src="images/sakura.jpg" alt="Sakura" class="character-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div class="character-fallback">
+                                    <div class="char-hair" style="background: #ffc0cb; width: 55px; height: 35px; position: absolute; top: 28px; border-radius: 50% 50% 0 0;"></div>
+                                    <div class="char-eyes" style="position: absolute; top: 52px;">
+                                        <div style="width: 8px; height: 8px; background: #2e7d32; border-radius: 50%; display: inline-block; margin: 0 4px;"></div>
+                                        <div style="width: 8px; height: 8px; background: #2e7d32; border-radius: 50%; display: inline-block; margin: 0 4px;"></div>
+                                    </div>
+                                    <div style="position: absolute; bottom: 15px; font-size: 1.2rem;">💪</div>
+                                </div>
+                            </div>
+                            <h4>Sakura</h4>
+                            <p class="character-type">Medical Ninja</p>
+                            <div class="character-stats">
+                                <span>⚡ Speed: ★★★☆☆</span>
+                                <span>💪 Power: ★★★★★</span>
+                                <span>🛡️ Defense: ★★★★☆</span>
+                            </div>
+                        </div>
+                        <div class="character-card" data-character="kakashi">
+                            <div class="character-preview kakashi-preview">
+                                <img src="images/kakashi.jpg" alt="Kakashi" class="character-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div class="character-fallback">
+                                    <div class="char-hair" style="background: #bdbdbd; width: 55px; height: 28px; position: absolute; top: 28px; border-radius: 50% 50% 0 0;"></div>
+                                    <div style="position: absolute; top: 52px; width: 30px; height: 15px; background: #424242; border-radius: 0 0 10px 10px;"></div>
+                                    <div style="position: absolute; bottom: 15px; font-size: 1.5rem;">📖</div>
+                                </div>
+                            </div>
+                            <h4>Kakashi</h4>
+                            <p class="character-type">Tactical Master</p>
+                            <div class="character-stats">
+                                <span>⚡ Speed: ★★★★☆</span>
+                                <span>💪 Power: ★★★★☆</span>
+                                <span>🛡️ Defense: ★★★★☆</span>
+                            </div>
+                        </div>
+                        <div class="character-card" data-character="rock-lee">
+                            <div class="character-preview rock-lee-preview">
+                                <img src="images/rock-lee.jpg" alt="Rock Lee" class="character-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div class="character-fallback">
+                                    <div class="char-hair" style="background: #1a1a1a; width: 50px; height: 20px; position: absolute; top: 32px; border-radius: 50% 50% 0 0;"></div>
+                                    <div class="char-eyes" style="position: absolute; top: 52px;">
+                                        <div style="width: 10px; height: 10px; background: #000; border-radius: 50%; display: inline-block; margin: 0 3px; border: 2px solid #fff;"></div>
+                                        <div style="width: 10px; height: 10px; background: #000; border-radius: 50%; display: inline-block; margin: 0 3px; border: 2px solid #fff;"></div>
+                                    </div>
+                                    <div style="position: absolute; bottom: 15px; font-size: 1.5rem;">🔥</div>
+                                </div>
+                            </div>  
+                            <h4>Rock Lee</h4>
+                            <p class="character-type">Taijutsu Expert</p>
+                            <div class="character-stats">
+                                <span>⚡ Speed: ★★★★★</span>
+                                <span>💪 Power: ★★★☆☆</span>
+                                <span>🛡️ Defense: ★★★☆☆</span>
+                            </div>
+                        </div>
+                        <div class="character-card" data-character="gaara">
+                            <div class="character-preview gaara-preview">
+                                <img src="images/gaara.jpg" alt="Gaara" class="character-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div class="character-fallback">
+                                    <div class="char-hair" style="background: #d32f2f; width: 55px; height: 30px; position: absolute; top: 28px; border-radius: 50% 50% 0 0;"></div>
+                                    <div class="char-eyes" style="position: absolute; top: 50px;">
+                                        <div style="width: 8px; height: 8px; background: #00bcd4; border-radius: 50%; display: inline-block; margin: 0 4px;"></div>
+                                        <div style="width: 8px; height: 8px; background: #00bcd4; border-radius: 50%; display: inline-block; margin: 0 4px;"></div>
+                                    </div>
+                                    <div style="position: absolute; top: 45px; font-size: 1rem; color: #8b0000;">愛</div>
+                                </div>
+                            </div>
+                            <h4>Gaara</h4>
+                            <p class="character-type">Tank</p>
+                            <div class="character-stats">
+                                <span>⚡ Speed: ★★☆☆☆</span>
+                                <span>💪 Power: ★★★★☆</span>
+                                <span>🛡️ Defense: ★★★★★</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu">
+                    <button class="menu-btn" id="startBtn">START GAME</button>
+                    <div class="difficulty-select">
+                        <label>Difficulty:</label>
+                        <select id="difficultySelect">
+                            <option value="easy">Genin (Easy)</option>
+                            <option value="medium" selected>Chunin (Medium)</option>
+                            <option value="hard">Jonin (Hard)</option>
+                            <option value="extreme">Hokage (Extreme)</option>
+                        </select>
+                    </div>
+                    <div class="arena-select">
+                        <label>Arena:</label>
+                        <select id="arenaSelect">
+                            <option value="forest">Hidden Leaf Forest</option>
+                            <option value="mountains">Mountain Valley</option>
+                            <option value="village">Training Grounds</option>
+                            <option value="waterfall">Waterfall Arena</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="controls-info">
+                    <h3>Controls</h3>
+                    <p><strong>Movement:</strong> A/D or Arrow Keys</p>
+                    <p><strong>Jump:</strong> W or Up Arrow</p>
+                    <p><strong>Attack:</strong> J or Space</p>
+                    <p><strong>Special Jutsu:</strong> K or Shift</p>
+                    <p><strong>Ultimate Jutsu:</strong> L or Enter</p>
+                    <p><strong>Block:</strong> S or Down Arrow</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen">
+            <!-- HUD -->
+            <div class="hud">
+                <!-- Player Stats -->
+                <div class="player-hud left">
+                    <div class="character-name">PLAYER</div>
+                    <div class="health-bar-container">
+                        <div class="bar-label">HP</div>
+                        <div class="health-bar">
+                            <div id="playerHealth" class="health-fill"></div>
+                        </div>
+                    </div>
+                    <div class="chakra-bar-container">
+                        <div class="bar-label">CHAKRA</div>
+                        <div class="chakra-bar">
+                            <div id="playerChakra" class="chakra-fill"></div>
+                        </div>
+                    </div>
+                    <div class="combo-counter" id="playerCombo">0 HIT COMBO</div>
+                </div>
+
+                <!-- Timer -->
+                <div class="timer-container">
+                    <div id="timer">99</div>
+                    <div class="round-info">ROUND 1</div>
+                </div>
+
+                <!-- Enemy Stats -->
+                <div class="player-hud right">
+                    <div class="character-name">AI OPPONENT</div>
+                    <div class="health-bar-container">
+                        <div class="bar-label">HP</div>
+                        <div class="health-bar">
+                            <div id="enemyHealth" class="health-fill"></div>
+                        </div>
+                    </div>
+                    <div class="chakra-bar-container">
+                        <div class="bar-label">CHAKRA</div>
+                        <div class="chakra-bar">
+                            <div id="enemyChakra" class="chakra-fill"></div>
+                        </div>
+                    </div>
+                    <div class="combo-counter" id="enemyCombo">0 HIT COMBO</div>
+                </div>
+            </div>
+
+            <!-- Game Canvas -->
+            <canvas id="gameCanvas"></canvas>
+
+            <!-- Pause Menu -->
+            <div id="pauseMenu" class="pause-menu hidden">
+                <h2>PAUSED</h2>
+                <button class="menu-btn" id="resumeBtn">Resume</button>
+                <button class="menu-btn" id="restartBtn">Restart</button>
+                <button class="menu-btn" id="quitBtn">Quit to Menu</button>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameOverScreen" class="screen">
+            <div class="game-over-content">
+                <h1 id="resultText" class="result-text">VICTORY</h1>
+                <div id="statsDisplay" class="stats-display"></div>
+                <div class="menu">
+                    <button class="menu-btn" id="playAgainBtn">Play Again</button>
+                    <button class="menu-btn" id="mainMenuBtn">Main Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

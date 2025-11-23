@@ -1,0 +1,1144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    overflow: hidden;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation;
+}
+
+.game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+/* Screen Management */
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Title Screen */
+#titleScreen {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    flex-direction: column;
+}
+
+.title-content {
+    text-align: center;
+    animation: fadeIn 1s ease-in;
+    max-height: 100vh;
+    overflow-y: auto;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Custom scrollbar for title screen */
+.title-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.title-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.title-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #ff6b35, #f7931e);
+    border-radius: 10px;
+}
+
+.title-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #f7931e, #ffd700);
+}
+
+.game-title {
+    font-size: 4rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ff6b35, #f7931e, #ffd700);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+    margin-bottom: 10px;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.5));
+    }
+    to {
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+    }
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: #ffd700;
+    margin-bottom: 40px;
+    letter-spacing: 3px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.menu-btn {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ff6b35, #f7931e);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    min-height: 48px;
+}
+
+.menu-btn:hover,
+.menu-btn:focus {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.6);
+    background: linear-gradient(45deg, #f7931e, #ff6b35);
+    outline: none;
+}
+
+.menu-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(255, 107, 53, 0.4);
+}
+
+.difficulty-select, .arena-select {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: #ffd700;
+}
+
+.difficulty-select label, .arena-select label {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+select {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #ff6b35;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+select option {
+    background: #1a1a2e;
+    color: white;
+}
+
+.controls-info {
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 107, 53, 0.3);
+}
+
+.controls-info h3 {
+    color: #ffd700;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.controls-info p {
+    margin: 8px 0;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+/* Character Selection */
+.character-selection {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.character-selection h3 {
+    color: #ffd700;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.character-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.character-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 3px solid rgba(255, 107, 53, 0.3);
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    min-height: 200px;
+}
+
+.character-card:hover,
+.character-card:active {
+    transform: translateY(-5px);
+    border-color: rgba(255, 107, 53, 0.6);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+}
+
+.character-card.selected {
+    border-color: #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.character-card.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ffd700;
+    color: #000;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.character-preview {
+    width: 100%;
+    height: 120px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Character Image Styling */
+.character-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: transform 0.3s ease;
+}
+
+.character-card:hover .character-image {
+    transform: scale(1.05);
+}
+
+.character-fallback {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Naruto - Orange and Yellow */
+.naruto-preview {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+}
+
+.naruto-preview::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #ffdbac;
+    border-radius: 50%;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.naruto-preview::after {
+    content: '';
+    position: absolute;
+    width: 45px;
+    height: 8px;
+    background: #ff6b35;
+    top: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+/* Sasuke - Dark Blue/Purple */
+.sasuke-preview {
+    background: linear-gradient(135deg, #3b4371, #5b6a9e);
+}
+
+.sasuke-preview::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #ffe0bd;
+    border-radius: 50%;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.sasuke-preview::after {
+    content: '⚡';
+    position: absolute;
+    font-size: 2.5rem;
+    top: 10px;
+    right: 10px;
+    color: #9c27b0;
+    text-shadow: 0 0 10px #9c27b0;
+}
+
+/* Sakura - Pink */
+.sakura-preview {
+    background: linear-gradient(135deg, #ff6b9d, #ffa8c5);
+}
+
+.sakura-preview::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #ffe0d0;
+    border-radius: 50%;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.sakura-preview::after {
+    content: '🌸';
+    position: absolute;
+    font-size: 2rem;
+    top: 10px;
+    right: 10px;
+}
+
+/* Kakashi - Gray/Silver */
+.kakashi-preview {
+    background: linear-gradient(135deg, #757575, #9e9e9e);
+}
+
+.kakashi-preview::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #f5deb3;
+    border-radius: 50%;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Add Sharingan eye effect for Kakashi */
+.kakashi-preview::after {
+    content: '👁️';
+    position: absolute;
+    font-size: 2rem;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 0 5px #00e5ff);
+}
+
+/* Rock Lee - Green and Orange */
+.rock-lee-preview {
+    background: linear-gradient(135deg, #2e7d32, #4caf50);
+}
+
+.rock-lee-preview::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #d4a574;
+    border-radius: 50%;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.rock-lee-preview::after {
+    content: '👊';
+    position: absolute;
+    font-size: 2.5rem;
+    top: 10px;
+    right: 10px;
+    filter: drop-shadow(0 0 5px #76ff03);
+}
+
+/* Gaara - Red/Sand */
+.gaara-preview {
+    background: linear-gradient(135deg, #c62828, #e53935);
+}
+
+.gaara-preview::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #f0e6d2;
+    border-radius: 50%;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.gaara-preview::after {
+    content: '🏜️';
+    position: absolute;
+    font-size: 1.8rem;
+    top: 10px;
+    right: 10px;
+}
+
+/* Character face animations */
+.char-hair {
+    z-index: 2;
+    animation: hairFloat 2s ease-in-out infinite;
+}
+
+.char-eyes {
+    z-index: 3;
+    animation: blink 4s infinite;
+}
+
+@keyframes hairFloat {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-2px); }
+}
+
+@keyframes blink {
+    0%, 45%, 55%, 100% { opacity: 1; }
+    48%, 52% { opacity: 0.3; }
+}
+
+/* Hover effects for character cards */
+.character-card:hover .character-preview::before {
+    animation: faceGlow 1s ease-in-out infinite;
+}
+
+@keyframes faceGlow {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.05); }
+}
+
+/* Character-specific animations */
+.naruto-preview:hover::after {
+    animation: spinHeadband 2s linear infinite;
+}
+
+@keyframes spinHeadband {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg); }
+}
+
+.sasuke-preview:hover::after {
+    animation: lightning 0.5s ease-in-out infinite;
+}
+
+@keyframes lightning {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.2); }
+}
+
+.sakura-preview:hover::after {
+    animation: petalFloat 2s ease-in-out infinite;
+}
+
+@keyframes petalFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(10deg); }
+}
+
+.kakashi-preview:hover::after {
+    animation: sharinganSpin 1s linear infinite;
+}
+
+@keyframes sharinganSpin {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg); }
+}
+
+.rock-lee-preview:hover::after {
+    animation: firePulse 0.5s ease-in-out infinite;
+}
+
+@keyframes firePulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px #76ff03); }
+    50% { transform: scale(1.2); filter: drop-shadow(0 0 15px #76ff03); }
+}
+
+.gaara-preview:hover::after {
+    animation: sandStorm 3s ease-in-out infinite;
+}
+
+@keyframes sandStorm {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.character-card h4 {
+    color: #ffd700;
+    font-size: 1.2rem;
+    margin: 10px 0 5px;
+}
+
+.character-type {
+    color: #ff6b35;
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.character-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.85rem;
+    color: #ccc;
+    text-align: left;
+}
+
+.character-stats span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Game Screen */
+#gameScreen {
+    flex-direction: column;
+    background: #000;
+}
+
+/* HUD */
+.hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    z-index: 10;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.player-hud {
+    width: 35%;
+}
+
+.player-hud.left {
+    text-align: left;
+}
+
+.player-hud.right {
+    text-align: right;
+}
+
+.character-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #ffd700;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.health-bar-container, .chakra-bar-container {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-hud.right .health-bar-container,
+.player-hud.right .chakra-bar-container {
+    flex-direction: row-reverse;
+}
+
+.bar-label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #fff;
+    min-width: 60px;
+}
+
+.health-bar, .chakra-bar {
+    height: 25px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    flex: 1;
+    position: relative;
+}
+
+.health-fill, .chakra-fill {
+    height: 100%;
+    width: 100%;
+    transition: width 0.3s ease;
+}
+
+.health-fill {
+    background: linear-gradient(90deg, #00ff00, #32cd32);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.chakra-fill {
+    background: linear-gradient(90deg, #00bfff, #1e90ff);
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+.combo-counter {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ff6b35;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.timer-container {
+    text-align: center;
+}
+
+#timer {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: 3px solid #ffd700;
+}
+
+.round-info {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #ffd700;
+    font-weight: bold;
+}
+
+/* Canvas */
+#gameCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #000;
+}
+
+/* Pause Menu */
+.pause-menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.95);
+    padding: 40px;
+    border-radius: 15px;
+    border: 3px solid #ff6b35;
+    z-index: 100;
+    text-align: center;
+}
+
+.pause-menu.hidden {
+    display: none;
+}
+
+.pause-menu h2 {
+    color: #ffd700;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+}
+
+/* Game Over Screen */
+#gameOverScreen {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+}
+
+.game-over-content {
+    text-align: center;
+    animation: fadeIn 1s ease-in;
+}
+
+.result-text {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-shadow: 0 0 20px currentColor;
+}
+
+.result-text.victory {
+    color: #00ff00;
+}
+
+.result-text.defeat {
+    color: #ff0000;
+}
+
+.stats-display {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    border: 2px solid rgba(255, 107, 53, 0.5);
+}
+
+.stats-display p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #ffd700;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Low health warning */
+.health-fill.low {
+    background: linear-gradient(90deg, #ff0000, #ff6b35);
+    animation: pulse 0.5s infinite;
+}
+
+/* Responsive Design */
+
+/* Tablets and smaller desktops */
+@media (max-width: 1024px) {
+    .character-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 600px;
+    }
+
+    .game-title {
+        font-size: 3rem;
+    }
+
+    .controls-info {
+        max-width: 600px;
+        margin: 40px auto;
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+    .game-title {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    /* Character Selection */
+    .character-selection {
+        margin: 20px 0;
+    }
+
+    .character-selection h3 {
+        font-size: 1.2rem;
+    }
+
+    .character-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        max-width: 500px;
+    }
+
+    .character-card {
+        padding: 10px;
+    }
+
+    .character-card h4 {
+        font-size: 1rem;
+    }
+
+    .character-type {
+        font-size: 0.8rem;
+    }
+
+    .character-stats {
+        font-size: 0.75rem;
+    }
+
+    .character-preview {
+        height: 100px;
+    }
+
+    .character-preview::before {
+        font-size: 3rem;
+    }
+
+    .char-hair {
+        width: 45px !important;
+        height: 20px !important;
+    }
+
+    .char-eyes {
+        transform: scale(0.9);
+    }
+
+    /* Menu buttons */
+    .menu {
+        gap: 15px;
+    }
+
+    .menu-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    .difficulty-select, .arena-select {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .difficulty-select label, .arena-select label {
+        font-size: 1rem;
+    }
+
+    select {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    /* Controls info */
+    .controls-info {
+        font-size: 0.8rem;
+        padding: 15px;
+        margin-top: 30px;
+    }
+
+    .controls-info h3 {
+        font-size: 1.1rem;
+    }
+
+    .controls-info p {
+        font-size: 0.85rem;
+    }
+
+    /* Game HUD */
+    .player-hud {
+        width: 45%;
+    }
+
+    #timer {
+        font-size: 2rem;
+        padding: 5px 15px;
+    }
+
+    .character-name {
+        font-size: 1rem;
+    }
+
+    .health-bar, .chakra-bar {
+        height: 20px;
+    }
+
+    .bar-label {
+        font-size: 0.8rem;
+        min-width: 50px;
+    }
+
+    .combo-counter {
+        font-size: 0.9rem;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    .game-title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+
+    /* Character Selection - Single column */
+    .character-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+        gap: 10px;
+    }
+
+    .character-selection h3 {
+        font-size: 1rem;
+    }
+
+    .character-card {
+        padding: 10px;
+    }
+
+    .character-preview {
+        height: 80px;
+    }
+
+    .character-preview::before {
+        font-size: 2.5rem;
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .char-hair {
+        width: 38px !important;
+        height: 18px !important;
+        top: 25px !important;
+    }
+
+    .char-eyes {
+        transform: scale(0.8);
+        top: 45px !important;
+    }
+
+    .character-stats span {
+        font-size: 0.7rem;
+    }
+
+    /* Menu */
+    .menu {
+        gap: 10px;
+    }
+
+    .menu-btn {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+
+    .difficulty-select label, .arena-select label {
+        font-size: 0.9rem;
+    }
+
+    select {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+
+    /* Controls info */
+    .controls-info {
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .controls-info h3 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .controls-info p {
+        font-size: 0.75rem;
+        margin: 5px 0;
+    }
+
+    /* Game HUD - Compact */
+    .hud {
+        padding: 10px;
+    }
+
+    .player-hud {
+        width: 48%;
+    }
+
+    .character-name {
+        font-size: 0.8rem;
+        margin-bottom: 5px;
+    }
+
+    #timer {
+        font-size: 1.5rem;
+        padding: 5px 10px;
+    }
+
+    .round-info {
+        font-size: 0.8rem;
+    }
+
+    .health-bar, .chakra-bar {
+        height: 15px;
+    }
+
+    .bar-label {
+        font-size: 0.7rem;
+        min-width: 40px;
+    }
+
+    .combo-counter {
+        font-size: 0.75rem;
+    }
+
+    /* Pause Menu */
+    .pause-menu {
+        padding: 20px;
+        width: 90%;
+    }
+
+    .pause-menu h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Game Over Screen */
+    .result-text {
+        font-size: 2.5rem;
+    }
+
+    .stats-display {
+        padding: 15px;
+    }
+
+    .stats-display p {
+        font-size: 1rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .game-title {
+        font-size: 1.5rem;
+    }
+
+    .character-grid {
+        max-width: 250px;
+    }
+
+    .character-preview {
+        height: 60px;
+    }
+
+    .character-preview::before {
+        width: 35px !important;
+        height: 35px !important;
+        top: 30px !important;
+    }
+
+    .char-hair {
+        width: 32px !important;
+        height: 15px !important;
+        top: 22px !important;
+    }
+
+    .char-eyes {
+        transform: scale(0.7);
+        top: 38px !important;
+    }
+
+    .menu-btn {
+        padding: 8px 20px;
+        font-size: 0.85rem;
+    }
+
+    .controls-info {
+        display: none; /* Hide on very small screens to save space */
+    }
+}
+
+/* Landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .title-content {
+        max-height: 100vh;
+        overflow-y: auto;
+        padding: 10px;
+    }
+
+    .character-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .character-preview {
+        height: 60px;
+    }
+
+    .character-preview::before {
+        font-size: 2rem;
+        width: 35px !important;
+        height: 35px !important;
+    }
+
+    .char-hair {
+        width: 35px !important;
+        height: 16px !important;
+        top: 20px !important;
+    }
+
+    .char-eyes {
+        transform: scale(0.75);
+        top: 36px !important;
+    }
+
+    .controls-info {
+        display: none; /* Hide in landscape mode */
+    }
+}

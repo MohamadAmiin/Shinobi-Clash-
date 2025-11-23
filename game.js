@@ -1186,6 +1186,74 @@ class Game {
 
             this.keys[e.key.toLowerCase()] = false;
         });
+
+        // Mobile touch controls
+        const controlButtons = document.querySelectorAll('.control-btn');
+        controlButtons.forEach(btn => {
+            // Touch start - activate key
+            btn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const key = btn.dataset.key;
+                if (key) {
+                    this.keys[key] = true;
+                }
+            });
+
+            // Touch end - deactivate key
+            btn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                const key = btn.dataset.key;
+                if (key) {
+                    this.keys[key] = false;
+                    // Reset jump key held flag when releasing jump button
+                    if (key === 'w') {
+                        this.jumpKeyHeld = false;
+                    }
+                }
+            });
+
+            // Touch cancel - also deactivate key (when touch is interrupted)
+            btn.addEventListener('touchcancel', (e) => {
+                e.preventDefault();
+                const key = btn.dataset.key;
+                if (key) {
+                    this.keys[key] = false;
+                    if (key === 'w') {
+                        this.jumpKeyHeld = false;
+                    }
+                }
+            });
+
+            // Mouse events for testing on desktop
+            btn.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                const key = btn.dataset.key;
+                if (key) {
+                    this.keys[key] = true;
+                }
+            });
+
+            btn.addEventListener('mouseup', (e) => {
+                e.preventDefault();
+                const key = btn.dataset.key;
+                if (key) {
+                    this.keys[key] = false;
+                    if (key === 'w') {
+                        this.jumpKeyHeld = false;
+                    }
+                }
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                const key = btn.dataset.key;
+                if (key) {
+                    this.keys[key] = false;
+                    if (key === 'w') {
+                        this.jumpKeyHeld = false;
+                    }
+                }
+            });
+        });
     }
 
     startGame() {

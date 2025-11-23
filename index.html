@@ -220,6 +220,45 @@
             <!-- Game Canvas -->
             <canvas id="gameCanvas"></canvas>
 
+            <!-- Mobile Controls -->
+            <div id="mobileControls" class="mobile-controls">
+                <!-- Movement Controls (Left Side) -->
+                <div class="movement-controls">
+                    <div class="dpad">
+                        <button class="control-btn jump-btn" data-key="w">
+                            <span>▲</span>
+                        </button>
+                        <div class="dpad-horizontal">
+                            <button class="control-btn left-btn" data-key="a">
+                                <span>◄</span>
+                            </button>
+                            <button class="control-btn right-btn" data-key="d">
+                                <span>►</span>
+                            </button>
+                        </div>
+                        <button class="control-btn block-btn" data-key="s">
+                            <span>🛡️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Controls (Right Side) -->
+                <div class="action-controls">
+                    <button class="control-btn special-btn" data-key="k">
+                        <span>K</span>
+                        <span class="btn-label">Special</span>
+                    </button>
+                    <button class="control-btn ultimate-btn" data-key="l">
+                        <span>L</span>
+                        <span class="btn-label">Ultimate</span>
+                    </button>
+                    <button class="control-btn attack-btn" data-key="j">
+                        <span>J</span>
+                        <span class="btn-label">Attack</span>
+                    </button>
+                </div>
+            </div>
+
             <!-- Pause Menu -->
             <div id="pauseMenu" class="pause-menu hidden">
                 <h2>PAUSED</h2>

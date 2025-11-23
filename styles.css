@@ -1142,3 +1142,247 @@ select option {
         display: none; /* Hide in landscape mode */
     }
 }
+
+/* Mobile Controls */
+.mobile-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 220px;
+    display: none;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 20px;
+    z-index: 50;
+    pointer-events: none;
+}
+
+.mobile-controls * {
+    pointer-events: auto;
+}
+
+/* Show mobile controls on touch devices or small screens */
+@media (max-width: 1024px), (hover: none) {
+    .mobile-controls {
+        display: flex;
+    }
+}
+
+/* Movement Controls (Left Side) */
+.movement-controls {
+    display: flex;
+    align-items: flex-end;
+}
+
+.dpad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.dpad-horizontal {
+    display: flex;
+    gap: 8px;
+}
+
+/* Action Controls (Right Side) */
+.action-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Control Buttons */
+.control-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transition: all 0.1s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.control-btn:active {
+    transform: scale(0.9);
+    background: rgba(255, 107, 53, 0.8);
+    border-color: #ff6b35;
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+}
+
+.control-btn span:first-child {
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.btn-label {
+    font-size: 0.6rem;
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Specific Button Styles */
+.jump-btn {
+    background: rgba(0, 191, 255, 0.3);
+    border-color: rgba(0, 191, 255, 0.5);
+}
+
+.jump-btn:active {
+    background: rgba(0, 191, 255, 0.8);
+    border-color: #00bfff;
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.6);
+}
+
+.left-btn, .right-btn {
+    background: rgba(100, 100, 100, 0.4);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.left-btn:active, .right-btn:active {
+    background: rgba(200, 200, 200, 0.8);
+    border-color: #fff;
+}
+
+.block-btn {
+    background: rgba(100, 100, 255, 0.3);
+    border-color: rgba(100, 100, 255, 0.5);
+}
+
+.block-btn:active {
+    background: rgba(100, 100, 255, 0.8);
+    border-color: #6464ff;
+    box-shadow: 0 0 20px rgba(100, 100, 255, 0.6);
+}
+
+.attack-btn {
+    background: rgba(255, 69, 0, 0.4);
+    border-color: rgba(255, 69, 0, 0.6);
+    width: 80px;
+    height: 80px;
+}
+
+.attack-btn:active {
+    background: rgba(255, 69, 0, 0.9);
+    border-color: #ff4500;
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.8);
+}
+
+.special-btn {
+    background: rgba(138, 43, 226, 0.4);
+    border-color: rgba(138, 43, 226, 0.6);
+}
+
+.special-btn:active {
+    background: rgba(138, 43, 226, 0.9);
+    border-color: #8a2be2;
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+}
+
+.ultimate-btn {
+    background: rgba(255, 215, 0, 0.4);
+    border-color: rgba(255, 215, 0, 0.6);
+}
+
+.ultimate-btn:active {
+    background: rgba(255, 215, 0, 0.9);
+    border-color: #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+/* Small mobile adjustments */
+@media (max-width: 480px) {
+    .mobile-controls {
+        height: 180px;
+        padding: 15px;
+    }
+
+    .control-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .attack-btn {
+        width: 70px;
+        height: 70px;
+    }
+
+    .btn-label {
+        font-size: 0.55rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .mobile-controls {
+        height: 160px;
+        padding: 10px;
+    }
+
+    .control-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+        border-width: 2px;
+    }
+
+    .attack-btn {
+        width: 60px;
+        height: 60px;
+    }
+
+    .btn-label {
+        font-size: 0.5rem;
+    }
+
+    .dpad {
+        gap: 6px;
+    }
+
+    .dpad-horizontal {
+        gap: 6px;
+    }
+
+    .action-controls {
+        gap: 8px;
+    }
+}
+
+/* Landscape mobile - Adjust control positioning */
+@media (max-width: 768px) and (orientation: landscape) {
+    .mobile-controls {
+        height: 140px;
+        padding: 10px;
+    }
+
+    .control-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 1.4rem;
+    }
+
+    .attack-btn {
+        width: 65px;
+        height: 65px;
+    }
+
+    .btn-label {
+        font-size: 0.5rem;
+    }
+}
